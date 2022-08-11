@@ -1,1 +1,1 @@
-# personal project github
+# Spring Boot Practice Project
