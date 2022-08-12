@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component  // 싱글톤으로 사용하기 위해서, 스프링 빈에 등록. 컴포넌트 스캔의 대상이 된다.
+@Component
 public class HelloTraceV1 {
     private static final String START_PREFIX = "-->";
     private static final String COMPLETE_PREFIX = "<--";
@@ -33,9 +33,9 @@ public class HelloTraceV1 {
         TraceId traceId = status.getTraceId();
 
         if (e == null) {
-            log.info("[{}] {}{}", traceId.getId(), addSpace(COMPLETE_PREFIX, traceId.getLevel()), status.getMessage(), resultTimeMs);
+            log.info("[{}] {}{} time={}ms", traceId.getId(), addSpace(COMPLETE_PREFIX, traceId.getLevel()), status.getMessage(), resultTimeMs);
         } else {
-            log.info("[{}] {}{}", traceId.getId(), addSpace(EX_PREFIX, traceId.getLevel()), status.getMessage(), resultTimeMs, e.toString());
+            log.info("[{}] {}{} time={}ms ex={}", traceId.getId(), addSpace(EX_PREFIX, traceId.getLevel()), status.getMessage(), resultTimeMs, e.toString());
         }
     }
 
